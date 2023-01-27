@@ -2,9 +2,10 @@
 let listGroupEl=document.querySelector("#history");
 let queryCity ="London";
 let queryURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&appid=21fb092a8c84c334822d90684ec401e3&q=";
-let todayEl=document.querySelector("#today")
+let todayEl=document.querySelector("#today");
 
-weatherInfo(queryCity)
+weatherInfo(queryCity);
+forecastQuery(queryCity);
 
 
 
@@ -20,7 +21,7 @@ for (let i = 0; i < cities.length; i++) {
   let oldBtn=document.createElement("button")
   oldBtn.classList.add("city-btn")
   oldBtn.textContent=btnText
-  listGroupEl.appendChild(oldBtn)
+  listGroupEl.appendChild(oldBtn);
 
   
 }}
@@ -45,18 +46,19 @@ $("#search-button").on("click", function(event) {
   weatherInfo(queryCity);
   
   
+  
 });
   
 
 
 
-//reading info for previous cities
+//reading info for cities btn
   
 $(document).on("click",".city-btn",function(event) {
   event.preventDefault();
   queryCity=event.target.innerHTML;
   weatherInfo(queryCity)
-  
+  forecastQuery(queryCity);
   
 })
 //function :retrieving info from OpenWeather for current weather
@@ -66,15 +68,10 @@ function weatherInfo(queryCity) {
    fetch(NewQueryURL)
  .then(response => response.json())
  .then(function(weather) {
-   console.log(weather)
-   console.log(weather.name);
-   console.log(weather.dt);
-   console.log(weather.weather[0].icon);
-   console.log((weather.main.temp));
-   console.log(weather.main.humidity);
-   console.log(weather.wind.speed);
+  //  console.log(weather)
+  
    let cityDate=moment((weather.dt)*1000).format('DD/MM/YYYY'); 
-   console.log(cityDate)
+  //  console.log(cityDate)
    todayEl.innerHTML=` <h3>${weather.name}</h3>
    <h3>(${cityDate})</h3>
    <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="weather-icon">
@@ -94,3 +91,38 @@ function weatherInfo(queryCity) {
    
    }) 
  }
+
+ // 5 days forecast
+ function forecastQuery(queryCity) {
+  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${queryCity}&limit=1&appid=21fb092a8c84c334822d90684ec401e3`)
+      .then(response => response.json())
+      .then(city=>{
+        console.log(city)
+       
+       return   fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${city[0].lat}&lon=${city[0].lon}&appid=21fb092a8c84c334822d90684ec401e3`)
+      } )
+
+     .then(response =>response.json())
+      .then(weatherForecast =>{
+        console.log(weatherForecast)
+        console.log(weatherForecast.city.name)
+        for (let i = 7; i <(weatherForecast.list).length; i=i+8) {
+          let forecastDate=moment((weatherForecast.list[i].dt)*1000).format('DD/MM/YYYY');
+          console.log("Temp:"+ weatherForecast.list[i].main.temp)
+          console.log("Humidity:"+ weatherForecast.list[i].main.humidity)
+          console.log("icon:"+ weatherForecast.list[i].weather[0].icon)
+
+          console.log("Wind:" + weatherForecast.list[i].wind.speed)
+          console.log(forecastDate);
+           
+         
+        }
+       
+        
+       
+      })
+  
+ }
+ 
+
+
