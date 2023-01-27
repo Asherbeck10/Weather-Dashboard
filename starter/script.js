@@ -2,7 +2,7 @@
 let listGroupEl=document.querySelector("#history");
 let queryCity ="London";
 let queryURL = "https://api.openweathermap.org/data/2.5/weather?&appid=21fb092a8c84c334822d90684ec401e3&q=";
-
+let sectionEl=document.querySelector("section")
 weatherInfo(queryCity)
 
 
