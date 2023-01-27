@@ -42,16 +42,17 @@ $("#search-button").on("click", function (event) {
 
   //and new button and appending city list
   cities.push(city);
-  queryCity = city
+  queryCity = city;
   localStorage.setItem("cities", JSON.stringify(cities));
   let newBtn = document.createElement("button");
   newBtn.textContent = city;
   listGroupEl.appendChild(newBtn);
   weatherInfo(queryCity);
-
-
-
 });
+
+
+
+  
 
 
 
@@ -75,7 +76,8 @@ function weatherInfo(queryCity) {
       //  console.log(weather)
 
       let cityDate = moment((weather.dt) * 1000).format('DD/MM/YYYY');
-      //  console.log(cityDate)
+      console.log(weather.dt)
+       console.log(cityDate)
       todayEl.innerHTML = ` <h3>${weather.name}</h3>
    <h3>(${cityDate})</h3>
    <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="weather-icon">
@@ -101,7 +103,7 @@ function forecastQuery(queryCity) {
   fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${queryCity}&limit=1&appid=21fb092a8c84c334822d90684ec401e3`)
     .then(response => response.json())
     .then(city => {
-      console.log(city)
+      //console.log(city)
 
       return fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${city[0].lat}&lon=${city[0].lon}&appid=21fb092a8c84c334822d90684ec401e3`)
     })
@@ -110,50 +112,84 @@ function forecastQuery(queryCity) {
     .then(weatherForecast => {
       console.log(weatherForecast)
       console.log(weatherForecast.city.name)
-      let forecastDates=[]
-      let icons=[]
+      let forecastDates=[];
+      let icons=[];
+      let temps=[];
+      let winds=[];
+      let humidities=[]
       //creating forecast cards
       for (let i = 7; i < (weatherForecast.list).length; i = i + 8) {
         let forecastDate = moment((weatherForecast.list[i].dt) * 1000).format('DD/MM/YYYY');
         forecastDates.push(forecastDate)
-        icons.push(weatherForecast.list[i].weather[0].icon)
-        console.log("Temp:" + weatherForecast.list[i].main.temp)
+        icons.push(weatherForecast.list[i].weather[0].icon);
+        temps.push(weatherForecast.list[i].main.temp);
+        winds.push(weatherForecast.list[i].wind.speed);
+        humidities.push(weatherForecast.list[i].main.humidity);
+      };
 
-        console.log("Humidity:" + weatherForecast.list[i].main.humidity)
        
         
         
 
-        console.log("Wind:" + weatherForecast.list[i].wind.speed)
-        console.log(forecastDate);
+      
        
 
       
       
-    }
-    console.log(icons)
+   
     forecastEl.innerHTML = ` <div class="card" style="width: 10rem;">
       <div class="card-body">
       <h5 class="card-title">${forecastDates[0]}</h5>
       <img src="http://openweathermap.org/img/wn/${icons[0]}@2x.png" alt="weather-icon">
-      <div class="card-text">Temp:20 C</div>
-      <div class="card-text">Wind: 30 KPH</div>
-      <div class="card-text">Humidity: 30%</div>
+      <div class="card-text">Temp: ${temps[0]} C</div>
+      <div class="card-text">Wind: ${winds[0]} KPH</div>
+      <div class="card-text">Humidity: ${humidities[0]}%</div>
       
        </div>
       </div>
-    
-       <div class="card" style="width: 10rem;">
-      <div class="card-body">
-      <h5 class="card-title">${forecastDates[1]}</h5>
-      <img src="http://openweathermap.org/img/wn/${icons[1]}@2x.png" alt="weather-icon">
-      <div class="card-text">Temp:20 C</div>
-      <div class="card-text">Wind: 30 KPH</div>
-      <div class="card-text">Humidity: 30%</div>
+      <div class="card" style="width: 10rem;">
+     <div class="card-body">
+     <h5 class="card-title">${forecastDates[1]}</h5>
+     <img src="http://openweathermap.org/img/wn/${icons[0]}@2x.png" alt="weather-icon">
+     <div class="card-text">Temp: ${temps[1]} C</div>
+     <div class="card-text">Wind: ${winds[1]} KPH</div>
+     <div class="card-text">Humidity: ${humidities[0]}%</div>
+     
+      </div>
+     </div>
+      <div class="card" style="width: 10rem;">
+     <div class="card-body">
+     <h5 class="card-title">${forecastDates[2]}</h5>
+     <img src="http://openweathermap.org/img/wn/${icons[0]}@2x.png" alt="weather-icon">
+     <div class="card-text">Temp: ${temps[2]} C</div>
+     <div class="card-text">Wind: ${winds[2]} KPH</div>
+     <div class="card-text">Humidity: ${humidities[0]}%</div>
+     
+      </div>
+     </div>
+      <div class="card" style="width: 10rem;">
+     <div class="card-body">
+     <h5 class="card-title">${forecastDates[3]}</h5>
+     <img src="http://openweathermap.org/img/wn/${icons[0]}@2x.png" alt="weather-icon">
+     <div class="card-text">Temp: ${temps[3]} C</div>
+     <div class="card-text">Wind: ${winds[3]} KPH</div>
+     <div class="card-text">Humidity: ${humidities[0]}%</div>
+     
+      </div>
+     </div>
+      <div class="card" style="width: 10rem;">
+     <div class="card-body">
+     <h5 class="card-title">${forecastDates[4]}</h5>
+     <img src="http://openweathermap.org/img/wn/${icons[0]}@2x.png" alt="weather-icon">
+     <div class="card-text">Temp: ${temps[4]} C</div>
+     <div class="card-text">Wind: ${winds[4]} KPH</div>
+     <div class="card-text">Humidity: ${humidities[0]}%</div>
+     
+      </div>
+     </div>`
       
-       </div>
-      </div>`
-
+      
+      
 
 
     })
