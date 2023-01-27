@@ -5,14 +5,14 @@ let queryURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&app
 let todayEl = document.querySelector("#today");
 let forecastEl = document.querySelector("#forecast");
 
-
+let cities = []
 weatherInfo(queryCity);
 forecastQuery(queryCity);
 
 
 
 //retrieving info
-let cities = []
+
 if (!JSON.parse(localStorage.getItem("cities"))) {
   console.log("empty")
 
@@ -48,6 +48,7 @@ $("#search-button").on("click", function (event) {
   newBtn.textContent = city;
   listGroupEl.appendChild(newBtn);
   weatherInfo(queryCity);
+  forecastQuery(queryCity);
 });
 
 
