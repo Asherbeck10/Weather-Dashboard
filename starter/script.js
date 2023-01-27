@@ -1,9 +1,9 @@
 
 let listGroupEl=document.querySelector("#history");
-let APIKey = "21fb092a8c84c334822d90684ec401e3";
-let queryCity ="";
+let queryCity ="London";
+let queryURL = "https://api.openweathermap.org/data/2.5/weather?&appid=21fb092a8c84c334822d90684ec401e3&q=";
 
-
+weatherInfo(queryCity)
 
 
 
@@ -48,11 +48,11 @@ $("#search-button").on("click", function(event) {
 
 
 
-//retrieving info from OpenWeather
+//retrieving info from OpenWeather for current weather
 
 function weatherInfo(queryCity) {
-  let queryURL = "https://api.openweathermap.org/data/2.5/weather?&appid=21fb092a8c84c334822d90684ec401e3&q="+queryCity;
-  fetch(queryURL)
+ let NewQueryURL=queryURL+queryCity;
+  fetch(NewQueryURL)
 .then(response => response.json())
 .then(function(weather) {
   console.log(weather.name);
