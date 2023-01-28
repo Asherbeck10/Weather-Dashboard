@@ -6,29 +6,31 @@ let todayEl = document.querySelector("#today");
 let forecastEl = document.querySelector("#forecast");
 
 let cities = []
+console.log(cities)
+
 weatherInfo(queryCity);
 forecastQuery(queryCity);
-
 
 
 //retrieving info
 
 if (!JSON.parse(localStorage.getItem("cities"))) {
-  console.log("empty")
+  console.log("empty");
 
-} else {
+} else 
   cities = JSON.parse(localStorage.getItem("cities"))
 
-  for (let i = 0; i < cities.length; i++) {
-    const btnText = cities[i];
-    let oldBtn = document.createElement("button")
-    oldBtn.classList.add("city-btn")
-    oldBtn.textContent = btnText
-    listGroupEl.appendChild(oldBtn);
 
-
-  }
+  
+for (let i = 0; i < cities.length; i++) {
+  const btnText = cities[i];
+  let oldBtn = document.createElement("button")
+  oldBtn.classList.add("city-btn")
+  oldBtn.textContent = btnText
+  listGroupEl.appendChild(oldBtn);
 }
+
+
 
 //city search form 
 
@@ -45,11 +47,13 @@ $("#search-button").on("click", function (event) {
   queryCity = city;
   localStorage.setItem("cities", JSON.stringify(cities));
   let newBtn = document.createElement("button");
+  newBtn.classList.add("city-btn");
   newBtn.textContent = city;
   listGroupEl.appendChild(newBtn);
   weatherInfo(queryCity);
   forecastQuery(queryCity);
 });
+
 
 
 
@@ -77,8 +81,7 @@ function weatherInfo(queryCity) {
       //  console.log(weather)
 
       let cityDate = moment((weather.dt) * 1000).format('DD/MM/YYYY');
-      console.log(weather.dt)
-       console.log(cityDate)
+      
       todayEl.innerHTML = ` <h3>${weather.name}</h3>
    <h3>(${cityDate})</h3>
    <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="weather-icon">
@@ -111,8 +114,7 @@ function forecastQuery(queryCity) {
 
     .then(response => response.json())
     .then(weatherForecast => {
-      console.log(weatherForecast)
-      console.log(weatherForecast.city.name)
+      
       let forecastDates=[];
       let icons=[];
       let temps=[];
@@ -197,5 +199,7 @@ function forecastQuery(queryCity) {
 
 }
 
-
-
+$("#clear-all").on("click", function (event) {
+ localStorage.clear();
+ location.reload()
+})
