@@ -108,7 +108,7 @@ function forecastQuery(queryCity) {
   fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${queryCity}&limit=1&appid=21fb092a8c84c334822d90684ec401e3`)
     .then(response => response.json())
     .then(city => {
-      //console.log(city)
+     
 
       return fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${city[0].lat}&lon=${city[0].lon}&appid=21fb092a8c84c334822d90684ec401e3`)
     })
@@ -199,7 +199,7 @@ function forecastQuery(queryCity) {
     })
 
 }
-
+//list clearing
 $("#clear-all").on("click", function (event) {
  localStorage.clear();
  location.reload()
