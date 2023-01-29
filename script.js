@@ -84,7 +84,7 @@ function weatherInfo(queryCity) {
       
       todayEl.innerHTML = ` <div id="city-time"><h3>${weather.name}</h3>
    <h3>(${cityDate})</h3>
-   <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="weather-icon">
+   <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="weather-icon">
    </div>
 
    
@@ -105,7 +105,7 @@ function weatherInfo(queryCity) {
 
 // 5 days forecast function
 function forecastQuery(queryCity) {
-  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${queryCity}&limit=1&appid=21fb092a8c84c334822d90684ec401e3`)
+  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${queryCity}&limit=1&appid=21fb092a8c84c334822d90684ec401e3`)
     .then(response => response.json())
     .then(city => {
       //console.log(city)
