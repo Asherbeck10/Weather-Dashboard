@@ -82,21 +82,22 @@ function weatherInfo(queryCity) {
 
       let cityDate = moment((weather.dt) * 1000).format('DD/MM/YYYY');
       
-      todayEl.innerHTML = ` <h3>${weather.name}</h3>
+      todayEl.innerHTML = ` <div id="city-time"><h3>${weather.name}</h3>
    <h3>(${cityDate})</h3>
    <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="weather-icon">
-   <div>
-     <div>Temp:</div>
-     <div>${weather.main.temp} C</div>
    </div>
+
+   
    <div>
-     <div>Wind:</div>
-     <div>${weather.wind.speed}KPH</div>
-   </div>
-   <div>
-     <div>Humidity:</div>
-     <div>${weather.main.humidity}%</div>
+   <div>Temp:${weather.main.temp} C</div>
+   <div>Wind:${weather.wind.speed}KPH</div>
+   <div>Humidity:${weather.main.humidity}%</div>
    </div>`;
+ 
+
+     
+   
+     
 
 
     })

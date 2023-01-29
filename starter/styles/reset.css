@@ -1,0 +1,17 @@
+#city-time{display:flex;
+}
+    
+
+#today{
+    border-style: double;
+}
+
+#clear-all{
+    background-color: blue;
+    color: white;
+}
+#style{
+    background-color: #697114;
+    border-style: solid;
+}
+    
