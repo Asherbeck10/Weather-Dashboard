@@ -6,7 +6,7 @@ let todayEl = document.querySelector("#today");
 let forecastEl = document.querySelector("#forecast");
 
 let cities = []
-console.log(cities)
+
 
 weatherInfo(queryCity);
 forecastQuery(queryCity);
@@ -78,6 +78,17 @@ function weatherInfo(queryCity) {
   fetch(NewQueryURL)
     .then(response => response.json())
     .then(function (weather) {
+      
+      //invalid city name
+      if ((weather.cod!==200)) {
+        listGroupEl.removeChild(listGroupEl.children[0])
+        alert("invalid city try again")
+        cities.shift()
+        localStorage.setItem("cities", JSON.stringify(cities));
+
+        
+        
+      }
      
 
       let cityDate = moment((weather.dt) * 1000).format('DD/MM/YYYY');
@@ -115,6 +126,11 @@ function forecastQuery(queryCity) {
 
     .then(response => response.json())
     .then(weatherForecast => {
+      if ((weatherForecast.cod!==200)) {
+      
+        
+        
+      }
       
       let forecastDates=[];
       let icons=[];
