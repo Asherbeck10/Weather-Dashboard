@@ -43,13 +43,13 @@ $("#search-button").on("click", function (event) {
   };
 
   //and new button and appending city list
-  cities.push(city);
+  cities.unshift(city);
   queryCity = city;
   localStorage.setItem("cities", JSON.stringify(cities));
   let newBtn = document.createElement("button");
   newBtn.classList.add("city-btn");
   newBtn.textContent = city;
-  listGroupEl.appendChild(newBtn);
+  listGroupEl.prepend(newBtn);
   weatherInfo(queryCity);
   forecastQuery(queryCity);
 });
@@ -78,7 +78,7 @@ function weatherInfo(queryCity) {
   fetch(NewQueryURL)
     .then(response => response.json())
     .then(function (weather) {
-      //  console.log(weather)
+     
 
       let cityDate = moment((weather.dt) * 1000).format('DD/MM/YYYY');
       
