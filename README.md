@@ -33,6 +33,7 @@ This app  run in the browser, feature dynamically updated HTML (DOM),JSON,Bootst
 3. When the search button clicked the city current weather and 5 days forecast will appears.
 4. All searched cities are stored and can be reached by clicking on the history button.
 5. The history list can be cleared by clicking on the "clear list" button.
+6. The app will alert for an invalid city.
 
 
 ![history screen](./assets/weather_dashboard_history.png)
