@@ -3,7 +3,7 @@
 <br />
 
 
- # align="center" Weather Dashboard<
+ # Weather Dashboard
 
  
     This coding creates a weather outlook for multiple cities. 
