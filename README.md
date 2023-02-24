@@ -1,13 +1,13 @@
-<
+
 <!-- PROJECT LOGO -->
 <br />
 
 
-  <h1 align="center" Weather Dashboard</h1>
+ # align="center" Weather Dashboard<
 
-  <p align="center">
+ 
     This coding creates a weather outlook for multiple cities. 
-    <br />
+    
    
 
 <!-- ABOUT THE PROJECT -->
